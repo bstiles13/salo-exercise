@@ -1,1 +1,1 @@
-export const stripDomain = (email) => email.split('@')[0]
+export const stripDomain = (email) => email && email.split('@')[0]
