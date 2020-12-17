@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { stripHtml } from '../utils';
 
 // Action types
 // ----------------------------------------------------------------------------
@@ -40,10 +41,19 @@ export const fetchEmails = () => async (dispatch) => {
     const res = await axios.get('/api/emails');
     dispatch({
       type: FETCH_EMAILS_SUCCESS,
-      payload: res.data?.messages || []
+      payload: mapAndSortEmails(res)
     });
   } catch (error) {
     dispatch({ type: FETCH_EMAILS_FAILURE });
     throw Error(error);
   }
 };
+
+// Helpers
+// ----------------------------------------------------------------------------
+
+const mapAndSortEmails = (response) => {
+  let emails = response.data?.messages || [];
+  emails = emails.map(email => ({ ...email, plainBody: stripHtml(email.body)}));
+  return emails.sort((a, b) => b.date.localeCompare(a.date))
+}

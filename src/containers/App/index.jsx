@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchEmails } from '../../store/emails';
-import { Inbox } from '../Inbox';
+import Inbox from '../Inbox';
 import { Navbar } from '../Navbar';
 import { Sidebar } from '../Sidebar';
 
