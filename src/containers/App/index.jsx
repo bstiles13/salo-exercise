@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchEmails } from '../../store/emails';
 import Inbox from '../Inbox';
 import { Navbar } from '../Navbar';
-import { Sidebar } from '../Sidebar';
+import Sidebar from '../Sidebar';
 
 import './style.scss';
 

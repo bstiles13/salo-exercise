@@ -1,3 +1,23 @@
+@import '../../styles/variables/colors.scss';
+
 .sidebar {
   width: 15rem;
+
+  .filters {
+    .filter {
+      cursor: pointer;
+      margin-right: 1rem;
+      padding: 0.4rem 1rem;
+      text-transform: capitalize;
+      border-radius: 0 16px 16px 0;
+      
+      &:hover {
+        background-color: $gray;
+      }
+
+      &-tag {
+        padding-left: 2rem;
+      }
+    }
+  }
 }

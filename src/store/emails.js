@@ -57,3 +57,5 @@ const mapAndSortEmails = (response) => {
   emails = emails.map(email => ({ ...email, plainBody: stripHtml(email.body)}));
   return emails.sort((a, b) => b.date.localeCompare(a.date))
 }
+
+export default reducer;

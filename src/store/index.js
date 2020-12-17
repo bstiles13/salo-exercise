@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { reducer } from './emails';
+import emailsReducer from './emails';
+import filtersReducer from './filters';
 
 const reducers = combineReducers({
-  emails: reducer
+  emails: emailsReducer,
+  filter: filtersReducer
 });
 
 export default reducers;
