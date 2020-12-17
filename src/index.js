@@ -4,20 +4,20 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { App } from './containers/App';
+import { createLogger } from 'redux-logger';
+import reducers from './store';
+import App from './containers/App';
 
 import './styles/main.scss';
 
 let middleware = [thunk];
 
-middleware = window.__REDUX_DEVTOOLS_EXTENSION__
-  ? [...middleware, window.__REDUX_DEVTOOLS_EXTENSION__()]
-  : middleware;
+if (process.env.NODE_ENV !== 'production') {
+  const logger = createLogger({ collapsed: true });
+  middleware = [...middleware, logger];
+}
 
-const store = createStore(
-  (state = {}) => state,
-  applyMiddleware(...middleware),
-);
+const store = createStore(reducers, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store}>

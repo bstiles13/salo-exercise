@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const apiRoutes = require('./server/routes/apiRoutes');
 
 // Middleware
 // ----------------------------------------------------------------------------
@@ -13,6 +14,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Routes
 // ----------------------------------------------------------------------------
+
+app.use('/api', apiRoutes);
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'build', 'index.html')));
 
