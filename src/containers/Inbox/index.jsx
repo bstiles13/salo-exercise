@@ -12,7 +12,12 @@ export const Inbox = ({ emails }) => {
   }
 
   return (
-    <div className='inbox'>{renderEmails()}</div>
+    <div className='inbox'>
+      <div className='inbox-header'>
+        <div className='inbox-header-primary'>Primary</div>
+      </div>
+      {renderEmails()}
+    </div>
   );
 };
 
