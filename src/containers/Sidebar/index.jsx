@@ -12,16 +12,17 @@ export const Sidebar = ({ filter, setFilter }) => {
   const renderFilters = (type) => {
     return FILTERS.reduce((acc, item, i) => {
       if (item.type !== type) return acc;
-      const { name, color, background } = item;
+      const { name, color, background, icon } = item;
       const selected = filter?.name === name;
 
       acc.push(
         <div
           key={`filter-${i}`}
-          className={`filter filter-${type}`}
+          className={`filter filter-${type} ${selected ? 'selected' : ''}`}
           style={{ ...selected && { color: color, backgroundColor: background } }}
           id={name}
           onClick={() => setFilter(item)}>
+          <i class={icon} />
           {name}
         </div>
       )
@@ -34,7 +35,10 @@ export const Sidebar = ({ filter, setFilter }) => {
       Compose
       <div className='filters'>
         {renderFilters('primary')}
-        <div className={`filter filter-primary`} onClick={() => setShowTags(!showTags)}>Categories</div>
+        <div className={`filter filter-primary`} onClick={() => setShowTags(!showTags)}>
+          <i class={`fas fa-${showTags ? 'caret-down' : 'caret-right' }`} />
+          Categories
+        </div>
         {showTags && renderFilters('tag')}
       </div>
       {renderFilters()}
