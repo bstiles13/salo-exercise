@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Email } from '../../components/Email';
+import { filterEmails } from '../../store/emails';
 
 import './style.scss';
 
@@ -22,7 +23,7 @@ export const Inbox = ({ emails }) => {
 };
 
 const mapStateToProps = (state) => ({
-  emails: state.emails.emails
+  emails: filterEmails(state)
 })
 
 export default connect(mapStateToProps, null)(Inbox);

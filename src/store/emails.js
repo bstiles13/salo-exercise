@@ -59,3 +59,23 @@ const mapAndSortEmails = (response) => {
 }
 
 export default reducer;
+
+// Selectors
+// ----------------------------------------------------------------------------
+
+export const filterEmails = (state) => {
+  const filter = state.filter.filter;
+
+  if (!filter || filter.name === 'inbox') return state.emails.emails;
+
+  if (filter.type === 'primary') {
+    return state.emails.emails.filter(email => !!email[filter.type]);
+  }
+
+  if (filter.type === 'tag') {
+    return state.emails.emails.filter(email => email.tags.includes(filter.name));
+  }
+
+  // default
+  return state.emails.emails;
+}
