@@ -7,7 +7,7 @@ import { filterEmails, setSelectedEmail } from '../../store/emails';
 
 import './style.scss';
 
-export const Inbox = ({ emails, selectedEmail, setSelectedEmail, history }) => {
+export const Inbox = ({ emails, selectedEmail, filter, setSelectedEmail, history }) => {
   const selectEmail = (email) => {
     setSelectedEmail(email);
     history.push(`/view/${email.id}`);
@@ -22,7 +22,9 @@ export const Inbox = ({ emails, selectedEmail, setSelectedEmail, history }) => {
   return (
     <div className='inbox'>
       <div className='inbox-header'>
-        <div className='inbox-header-primary'>Primary</div>
+        <div className={`inbox-header-label ${filter.name}-label`}>
+          {filter.name === 'inbox' ? filter.name : `Category: ${filter.name}` }
+        </div>
         <div className='inbox-header-count'><span>{`${emails.length} of ${emails.length}`}</span></div>
       </div>
       {renderEmails()}
@@ -31,6 +33,7 @@ export const Inbox = ({ emails, selectedEmail, setSelectedEmail, history }) => {
 };
 
 const mapStateToProps = (state) => ({
+  filter: state.filter.filter,
   emails: filterEmails(state),
   selectedEmail: state.emails.selectedEmail
 })
