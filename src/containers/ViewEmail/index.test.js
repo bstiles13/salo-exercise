@@ -1,14 +1,14 @@
 import React from 'react';
-import { Inbox } from './index';
+import { ViewEmail } from './index';
 import { shallow } from 'enzyme';
 
-describe('Inbox component', () => {
+describe('ViewEmail component', () => {
   let wrapper;
 
   beforeEach(() => {
     jest.restoreAllMocks();
     wrapper = shallow(
-      <Inbox emails={[]} />
+      <ViewEmail emails={[]} selectedEmail={{}} />
     );
   });
 

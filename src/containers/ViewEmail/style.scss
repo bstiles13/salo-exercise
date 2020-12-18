@@ -1,0 +1,36 @@
+.view-email {
+  flex: 1;
+
+  &-section {
+    padding: 0.5rem 1rem;
+  }
+
+  &-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .fas {
+      cursor: pointer;
+    }
+
+    &-right {
+      .fas {
+        margin: 0 1rem
+      }
+    }
+  }
+
+  &-subject {
+    font-size: 1.5rem;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+
+    &-sender {
+      font-weight: bold;
+    }
+  }
+}

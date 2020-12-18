@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFilter } from '../../store/filters';
@@ -6,8 +7,13 @@ import { FILTERS } from '../../constants';
 
 import './style.scss';
 
-export const Sidebar = ({ filter, setFilter }) => {
+export const Sidebar = ({ filter, setFilter, history }) => {
   const [showTags, setShowTags] = useState(true);
+
+  const selectFilter = (filter) => {
+    setFilter(filter);
+    history.push('/inbox');
+  }
 
   const renderFilters = (type) => {
     return FILTERS.reduce((acc, item, i) => {
@@ -21,8 +27,8 @@ export const Sidebar = ({ filter, setFilter }) => {
           className={`filter filter-${type} ${selected ? 'selected' : ''}`}
           style={{ ...selected && { color: color, backgroundColor: background } }}
           id={name}
-          onClick={() => setFilter(item)}>
-          <i class={icon} />
+          onClick={() => selectFilter(item)}>
+          <i className={icon} />
           {name}
         </div>
       )
@@ -36,7 +42,7 @@ export const Sidebar = ({ filter, setFilter }) => {
       <div className='filters'>
         {renderFilters('primary')}
         <div className={`filter filter-primary`} onClick={() => setShowTags(!showTags)}>
-          <i class={`fas fa-${showTags ? 'caret-down' : 'caret-right' }`} />
+          <i className={`fas fa-${showTags ? 'caret-down' : 'caret-right' }`} />
           Categories
         </div>
         {showTags && renderFilters('tag')}
@@ -54,4 +60,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setFilter
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Sidebar));

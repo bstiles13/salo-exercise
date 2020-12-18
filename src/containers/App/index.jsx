@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchEmails } from '../../store/emails';
 import Inbox from '../Inbox';
+import ViewEmail from '../ViewEmail';
 import { Navbar } from '../Navbar';
 import Sidebar from '../Sidebar';
 
@@ -21,6 +22,7 @@ export const App = ({ fetchEmails }) => {
         <Sidebar />
         <Switch>
           <Route exact path='/inbox'><Inbox /></Route>
+          <Route path='/view/:id'><ViewEmail /></Route>
           <Redirect to='/inbox' />
         </Switch>
       </div>

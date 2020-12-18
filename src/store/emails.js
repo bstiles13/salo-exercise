@@ -7,12 +7,14 @@ import { stripHtml } from '../utils';
 export const FETCH_EMAILS_REQUEST = 'FETCH_EMAILS_REQUEST';
 export const FETCH_EMAILS_SUCCESS = 'FETCH_EMAILS_SUCCESS';
 export const FETCH_EMAILS_FAILURE = 'FETCH_EMAILS_REQUEST';
+export const SET_SELECTED_EMAIL = 'SET_SELECTED_EMAIL';
 
 // Initial state
 // ----------------------------------------------------------------------------
 
 export const INITIAL_STATE = {
   emails: [],
+  selectedEmail: {},
   isFetching: false
 };
 
@@ -27,6 +29,8 @@ export function reducer(state = INITIAL_STATE, { type, payload }) {
       return { ...state, isFetching: false, emails: payload };
     case FETCH_EMAILS_FAILURE:
       return { ...state, isFetching: false };
+    case SET_SELECTED_EMAIL:
+      return { ...state, selectedEmail: payload };
     default:
       return state;
   }
@@ -49,12 +53,17 @@ export const fetchEmails = () => async (dispatch) => {
   }
 };
 
+export const setSelectedEmail = (email) => ({
+  type: SET_SELECTED_EMAIL,
+  payload: email
+});
+
 // Helpers
 // ----------------------------------------------------------------------------
 
 const mapAndSortEmails = (response) => {
   let emails = response.data?.messages || [];
-  emails = emails.map(email => ({ ...email, plainBody: stripHtml(email.body)}));
+  emails = emails.map(email => ({ ...email, plainBody: stripHtml(email.body) }));
   return emails.sort((a, b) => b.date.localeCompare(a.date))
 }
 
