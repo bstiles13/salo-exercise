@@ -9,6 +9,7 @@
     height: 3rem;
     display: flex;
     align-items: stretch;
+    position: relative;
 
     &-primary {
       width: 251px;
@@ -31,6 +32,17 @@
         right: 0;
         bottom: 0;
       }
+    }
+
+    &-count {
+      margin: auto 1rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
     }
   }
 }

@@ -23,6 +23,7 @@ export const Inbox = ({ emails, selectedEmail, setSelectedEmail, history }) => {
     <div className='inbox'>
       <div className='inbox-header'>
         <div className='inbox-header-primary'>Primary</div>
+        <div className='inbox-header-count'><span>{`${emails.length} of ${emails.length}`}</span></div>
       </div>
       {renderEmails()}
     </div>
