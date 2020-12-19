@@ -86,17 +86,21 @@ export default reducer;
 
 export const filterEmails = (state) => {
   const filter = state.filter.filter;
+  const searchTerm = state.filter.searchTerm;
 
-  if (!filter || filter.name === 'inbox') return state.emails.emails;
+  let filteredEmails = state.emails.emails;
 
-  if (filter.type === 'primary') {
-    return state.emails.emails.filter(email => !!email[filter.name]);
+  if (filter.type === 'primary' && filter.name !== 'inbox') {
+    filteredEmails = filteredEmails.filter(email => !!email[filter.name]);
   }
 
   if (filter.type === 'tag') {
-    return state.emails.emails.filter(email => email.tags.includes(filter.name));
+    filteredEmails = filteredEmails.filter(email => email.tags.includes(filter.name));
   }
 
-  // default
-  return state.emails.emails;
+  if (!!searchTerm) {
+    filteredEmails = filteredEmails.filter(email => Object.keys(email).some(key => String(email[key]).toLowerCase().includes(searchTerm)));
+  }
+  
+  return filteredEmails;
 }
