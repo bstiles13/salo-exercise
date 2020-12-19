@@ -1,3 +1,5 @@
+@import '../../styles/variables/colors.scss';
+
 .view-email {
   flex: 1;
 
@@ -31,6 +33,15 @@
 
     &-sender {
       font-weight: bold;
+    }
+  }
+
+  i.fa-star {
+    margin: 0 0.5rem 0 1rem;
+    cursor: pointer;
+
+    &.highlight {
+      color: $gold !important;
     }
   }
 }

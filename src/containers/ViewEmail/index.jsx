@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { filterEmails, setSelectedEmail } from '../../store/emails';
+import { filterEmails, setSelectedEmail, updateEmail } from '../../store/emails';
 import { formatLongDate } from '../../utils';
 
 import './style.scss';
 
-export const ViewEmail = ({ emails, selectedEmail, setSelectedEmail, history }) => {
+export const ViewEmail = ({ emails, selectedEmail, setSelectedEmail, updateEmail, history }) => {
   useEffect(() => {
     Object.keys(selectedEmail).length === 0 && history.push('/inbox');
   }, [selectedEmail, history])
@@ -31,6 +31,13 @@ export const ViewEmail = ({ emails, selectedEmail, setSelectedEmail, history }) 
     selectEmail(emails[emailIndex + 1]);
   }
 
+  const starEmail = (e, clickedEmail) => {
+    e.stopPropagation();
+    const starred = !clickedEmail.starred;
+    updateEmail({ ...clickedEmail, starred });
+    setSelectedEmail({ ...selectedEmail, starred });
+  }
+
   return (
     <div className='view-email'>
       <div className='view-email-section view-email-controls'>
@@ -51,8 +58,9 @@ export const ViewEmail = ({ emails, selectedEmail, setSelectedEmail, history }) 
           <div className='view-email-header-sender'>{selectedEmail.sender}</div>
           <span>to me</span>
         </div>
-        <div className='view-email-header-left'>
+        <div className='view-email-header-right'>
           {formatLongDate(selectedEmail.date)}
+          <i className={`fa-star ${selectedEmail.starred ? 'fas highlight' : 'far'}`} onClick={(e) => starEmail(e, selectedEmail)} />
         </div>
       </div>
       <div className='view-email-section view-email-body'>
@@ -68,7 +76,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setSelectedEmail
+  setSelectedEmail,
+  updateEmail
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewEmail));
