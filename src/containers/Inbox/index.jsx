@@ -9,6 +9,11 @@ import './style.scss';
 
 export const Inbox = ({ emails, selectedEmail, filter, setSelectedEmail, updateEmail, history }) => {
   const selectEmail = (email) => {
+    if (email.id === selectedEmail.id) {
+      setSelectedEmail({});
+      return;
+    }
+
     setSelectedEmail(email);
     history.push(`/view/${email.id}`);
   }
