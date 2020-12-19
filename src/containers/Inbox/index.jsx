@@ -30,6 +30,10 @@ export const Inbox = ({ emails, selectedEmail, filter, setSelectedEmail, updateE
     ))
   }
 
+  const renderPlaceholder = () => {
+    return <div className='inbox-placeholder'>Oops, no results.</div>
+  }
+
   return (
     <div className='inbox'>
       <div className='inbox-header'>
@@ -38,7 +42,7 @@ export const Inbox = ({ emails, selectedEmail, filter, setSelectedEmail, updateE
         </div>
         <div className='inbox-header-count'><span>{`${emails.length} of ${emails.length}`}</span></div>
       </div>
-      {renderEmails()}
+      {emails.length ? renderEmails() : renderPlaceholder()}
     </div>
   );
 };
