@@ -2,9 +2,9 @@ $logo-gray: rgb(115,118,123);
 $input-background: #f1f3f4;
 
 .navbar {
-  flex: 3;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   &-logo, &-search {
     padding: 0.8rem 1rem;

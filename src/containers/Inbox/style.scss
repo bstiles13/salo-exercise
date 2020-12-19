@@ -2,8 +2,9 @@
 
 .inbox {
   flex: 1;
-  min-width: 0;
+  min-width: 35rem;
   margin-right: 1rem;
+  overflow: auto;
 
   &-header {
     height: 3rem;
