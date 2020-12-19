@@ -3,14 +3,16 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setSidebarFilter } from '../../store/filters';
+import { setSelectedEmail } from '../../store/emails';
 import { FILTERS } from '../../constants';
 
 import './style.scss';
 
-export const Sidebar = ({ filter, setSidebarFilter, history }) => {
+export const Sidebar = ({ filter, setSidebarFilter, setSelectedEmail, history }) => {
   const [showTags, setShowTags] = useState(true);
 
   const selectFilter = (filter) => {
+    setSelectedEmail({});
     setSidebarFilter(filter);
     history.push('/inbox');
   }
@@ -56,7 +58,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setSidebarFilter
+  setSidebarFilter,
+  setSelectedEmail
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Sidebar));
