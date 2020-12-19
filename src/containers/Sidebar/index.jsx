@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { setSidebarFilter } from '../../store/filters';
 import { setSelectedEmail } from '../../store/emails';
 import { FILTERS } from '../../constants';
+import { Filter } from '../../components/Filter';
 
 import './style.scss';
 
@@ -20,20 +21,10 @@ export const Sidebar = ({ filter, setSidebarFilter, setSelectedEmail, history })
   const renderFilters = (type) => {
     return FILTERS.reduce((acc, item, i) => {
       if (item.type !== type) return acc;
-      const { name, color, background, icon } = item;
-      const selected = filter?.name === name;
+      const selected = filter?.name === item.name;
 
-      acc.push(
-        <div
-          key={`filter-${i}`}
-          className={`filter filter-${type} ${selected ? 'selected' : ''}`}
-          style={{ ...selected && { color: color, backgroundColor: background } }}
-          id={name}
-          onClick={() => selectFilter(item)}>
-          <i className={icon} />
-          {name}
-        </div>
-      )
+      acc.push(<Filter key={`filter-${i}`} filter={item} selected={!!selected} selectFilter={selectFilter} />);
+
       return acc;
     }, [])
   };

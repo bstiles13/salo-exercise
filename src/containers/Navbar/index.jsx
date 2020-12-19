@@ -25,7 +25,7 @@ export const Navbar = ({ setSearchTerm }) => {
   return (
     <div className='navbar'>
       <div className='navbar-logo'>
-        <img src={logo} alt='' />
+        <img src={logo} alt='logo' />
         <span>Gmail</span>
       </div>
       <div className='navbar-search'>
