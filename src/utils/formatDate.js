@@ -21,7 +21,7 @@ export const formatLongDate = (isoDate) => {
 
   if (!date.isValid()) return isoDate;
 
-  if (date.isSame(moment(), 'day')) {
+  if (date.isSame(moment(), 'hour')) {
     return `${date.format('h:mm A')} (${moment().diff(date, 'minutes')} minute(s) ago)`;
   }
 
