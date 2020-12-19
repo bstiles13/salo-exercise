@@ -36,7 +36,6 @@
       max-width: 720px;
 
       input {
-        // height: 2rem;
         background: #f1f3f4;
         border: 1px solid transparent;
         border-radius: 8px;
@@ -54,6 +53,7 @@
       }
   
       .fa-times {
+        cursor: pointer;
         position: relative;
         left: -2rem;
       }
