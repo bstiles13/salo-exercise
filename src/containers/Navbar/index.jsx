@@ -6,7 +6,7 @@ import { setSearchTerm } from '../../store/filters';
 
 import './style.scss';
 
-export const Navbar = ({ searchTerm, setSearchTerm }) => {
+export const Navbar = ({ setSearchTerm }) => {
   const [value, setValue] = useState('');
 
   const onKeyDown = (e) => {

@@ -8,7 +8,7 @@ describe('Inbox component', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
     wrapper = shallow(
-      <Inbox emails={[]} />
+      <Inbox emails={[]} filter={{}} />
     );
   });
 
