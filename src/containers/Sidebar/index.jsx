@@ -38,7 +38,6 @@ export const Sidebar = ({ filter, setFilter, history }) => {
 
   return (
     <div className='sidebar'>
-      Compose
       <div className='filters'>
         {renderFilters('primary')}
         <div className={`filter filter-primary`} onClick={() => setShowTags(!showTags)}>
