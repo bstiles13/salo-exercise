@@ -8,6 +8,7 @@ export const FETCH_EMAILS_REQUEST = 'FETCH_EMAILS_REQUEST';
 export const FETCH_EMAILS_SUCCESS = 'FETCH_EMAILS_SUCCESS';
 export const FETCH_EMAILS_FAILURE = 'FETCH_EMAILS_REQUEST';
 export const SET_SELECTED_EMAIL = 'SET_SELECTED_EMAIL';
+export const UPDATE_EMAIL = 'UPDATE_EMAIL';
 
 // Initial state
 // ----------------------------------------------------------------------------
@@ -31,6 +32,8 @@ export function reducer(state = INITIAL_STATE, { type, payload }) {
       return { ...state, isFetching: false };
     case SET_SELECTED_EMAIL:
       return { ...state, selectedEmail: payload };
+    case UPDATE_EMAIL:
+      return { ...state, emails: payload };
     default:
       return state;
   }
@@ -58,6 +61,15 @@ export const setSelectedEmail = (email) => ({
   payload: email
 });
 
+export const updateEmail = (email) => (dispatch, getStore) => {
+  const currentEmails = getStore().emails.emails;
+  const nextEmails = currentEmails.map(currEmail => currEmail.id === email.id ? email : currEmail);
+  dispatch({
+    type: UPDATE_EMAIL,
+    payload: nextEmails
+  })
+}
+
 // Helpers
 // ----------------------------------------------------------------------------
 
@@ -78,7 +90,7 @@ export const filterEmails = (state) => {
   if (!filter || filter.name === 'inbox') return state.emails.emails;
 
   if (filter.type === 'primary') {
-    return state.emails.emails.filter(email => !!email[filter.type]);
+    return state.emails.emails.filter(email => !!email[filter.name]);
   }
 
   if (filter.type === 'tag') {
