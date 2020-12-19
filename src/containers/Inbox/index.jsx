@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Email } from '../../components/Email';
+import { PlaceholderText } from '../../components/PlaceholderText';
 import { filterEmails, setSelectedEmail, updateEmail } from '../../store/emails';
 
 import './style.scss';
@@ -30,10 +31,6 @@ export const Inbox = ({ emails, selectedEmail, filter, setSelectedEmail, updateE
     ))
   }
 
-  const renderPlaceholder = () => {
-    return <div className='inbox-placeholder'>Oops, no results.</div>
-  }
-
   return (
     <div className='inbox'>
       <div className='inbox-header'>
@@ -42,7 +39,7 @@ export const Inbox = ({ emails, selectedEmail, filter, setSelectedEmail, updateE
         </div>
         <div className='inbox-header-count'><span>{`${emails.length} of ${emails.length}`}</span></div>
       </div>
-      {emails.length ? renderEmails() : renderPlaceholder()}
+      {emails.length ? renderEmails() : <PlaceholderText />}
     </div>
   );
 };
